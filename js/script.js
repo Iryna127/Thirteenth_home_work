@@ -19,7 +19,7 @@ deleay();
 
 // Third task
 
-function createDice() {
+/* function createDice() {
   let arrNew = [];
   for (let i = 0; i < 3; i++) {
     arrNew.push(
@@ -44,4 +44,32 @@ function createDice() {
       console.log('Not today(');
     });
 }
-createDice();
+createDice(); */
+
+///
+function createDice() {
+  return new Promise((resolve, reject) => {
+    let num = Math.round(Math.random() * 10);
+    if (num >= 6) {
+      resolve();
+      console.log(`Успех = ${num}`);
+    } else {
+      reject();
+      console.log(`Провал = ${num}`);
+    }
+  });
+}
+
+function createThreePromises() {
+  let num1 = createDice();
+  let num2 = createDice();
+  let num3 = createDice();
+  Promise.all([num1, num2, num3])
+    .then(() => {
+      console.log('You are lucky!');
+    })
+    .catch(() => {
+      console.log('Not today(');
+    });
+}
+createThreePromises();
